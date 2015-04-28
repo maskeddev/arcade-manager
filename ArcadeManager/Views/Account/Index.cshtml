@@ -1,0 +1,72 @@
+﻿@{
+    ViewBag.Title = "Arcade Manager";
+}
+
+
+
+
+<div class="container">
+
+    <div class="jumbotron">
+        <h1>Arcade Manager</h1>
+        <p>
+            The online simulator taking you back to the golden era of arcade gaming.<br />
+        </p>
+    </div>
+
+    @{
+        if (!string.IsNullOrEmpty(ViewData["Message"] as string))
+        {
+            <div class="alert alert-danger" role="alert">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                <span class="sr-only">Error:</span>
+                @ViewData["Message"]
+            </div>
+        }
+    }
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="well well-sm">
+                <h3>Sign in</h3>
+
+
+                @using (Html.BeginForm("Login", "Account", FormMethod.Post))
+                {
+                    <div class="form-group">
+                        <label for="LoginEmail">Email address:</label>
+                        <input type="email" class="form-control" id="LoginEmail" name="LoginEmail">
+                    </div>
+                    <div class="form-group">
+                        <label for="LoginPassword">Password:</label>
+                        <input type="password" class="form-control" id="LoginPassword" name="LoginPassword">
+                    </div>
+                    <button type="submit" class="btn btn-default">Submit</button>
+                }
+
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="well well-sm">
+                <h3>Sign up</h3>
+
+                @using (Html.BeginForm("Create", "Account", FormMethod.Post))
+                {
+                    <div class="form-group">
+                        <label for="RegisterName">Name:</label>
+                        <input type="text" class="form-control" id="RegisterName" name="RegisterName">
+                    </div>
+                    <div class="form-group">
+                        <label for="RegisterEmail">Email address:</label>
+                        <input type="email" class="form-control" id="RegisterEmail" name="RegisterEmail">
+                    </div>
+                    <div class="form-group">
+                        <label for="RegisterPassword">Password:</label>
+                        <input type="password" class="form-control" id="RegisterPassword" name="RegisterPassword">
+                    </div>
+                    <button type="submit" class="btn btn-default">Submit</button>
+                }
+            </div>
+        </div>
+    </div>
+</div>
