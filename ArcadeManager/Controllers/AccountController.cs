@@ -18,6 +18,12 @@ namespace ArcadeManager.Controllers
             return View();
         }
 
+        public ActionResult Logout()
+        {
+            new SessionManager().RemoveSession();
+            return RedirectToAction("Index", "Home");
+        }
+
         [HttpPost]
         public ActionResult Login(FormCollection formCollection) 
         {

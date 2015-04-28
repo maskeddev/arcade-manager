@@ -17,6 +17,12 @@ namespace ArcadeManager.Models
             return HttpContext.Current.Session["User"] as User;
         }
 
+        public void RemoveSession()
+        {
+            HttpContext.Current.Session["User"] = null;
+        }
+
+
         public bool Exists()
         {
             return (HttpContext.Current.Session["User"] != null);

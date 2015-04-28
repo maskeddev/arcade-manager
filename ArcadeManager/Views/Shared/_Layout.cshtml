@@ -7,7 +7,6 @@
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
-
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -22,19 +21,17 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        @{
-                            if (new ArcadeManager.Models.SessionManager().Exists())
-                            {
-                                var user = new ArcadeManager.Models.SessionManager().GetSession();
-                                @Html.ActionLink(user.Name, "Index", "Account")
-                            }
-                            else
-                            {
-                                @Html.ActionLink("Sign in / Sign up", "Index", "Account")
-                            }
+                    @{
+                        if (new ArcadeManager.Models.SessionManager().Exists())
+                        {
+                            <li><a href="" data-toggle="modal" data-target="#PlayModal">Play</a></li>
+                            <li>@Html.ActionLink("Sign out", "Logout", "Account")</li>
                         }
-                    </li>
+                        else
+                        {
+                            <li>@Html.ActionLink("Sign in / Sign up", "Index", "Account")</li>
+                        }
+                    }
                 </ul>
             </div>
         </div>
@@ -48,10 +45,51 @@
         </footer>
     </div>
 
+    <div class="modal fade" id="PlayModal" tabindex="-1" role="dialog" aria-labelledby="PlayModal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-body">
+                    @{
+                        var user = new ArcadeManager.Models.SessionManager().GetSession();
+                        if (user != null && user.Games != null)
+                        {
+                            foreach (var game in user.Games)
+                            {
+                                @Html.ActionLink(game.Name, "LoadGame", "Home")
+                            }
+                        }
+                        else
+                        {
+                            <p>You have no games available to load</p>
+                        }
+                    }
+
+                    @using (Html.BeginForm("NewGame", "Home", FormMethod.Post))
+                    {
+                        <hr />
+                        <div class="row">
+                            <input type="text" class="form-control pull-left" id="GameName" name="GameName" placeholder="Enter a name for a new game">
+                            <button type="submit" class="btn btn-primary pull-left">New game</button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
 
     @RenderSection("scripts", false)
 
+    <script>
+        $(function () {
+        });
+    </script>
+
 </body>
+
+
+
 </html>

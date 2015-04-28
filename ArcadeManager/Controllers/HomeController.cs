@@ -14,13 +14,13 @@ namespace ArcadeManager.Controllers
         }
 
         [HttpPost]
-        public ActionResult NewGame(string password)
+        public ActionResult NewGame(string gameName)
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult LoadGame(string guid, string password)
+        public ActionResult LoadGame(string name)
         {
             return View();
         }

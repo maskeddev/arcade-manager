@@ -7,5 +7,6 @@ namespace ArcadeManager.Models
 {
     public class Game
     {
+        public string Name;
     }
 }
